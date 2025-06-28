@@ -2,10 +2,7 @@
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/Product.php';
 
-/**
- * Stock Movement Management Class
- * Handles stock entries and exits with transaction support
- */
+
 class StockMovement {
     private $db;
     private $productManager;
@@ -15,21 +12,19 @@ class StockMovement {
         $this->productManager = new Product();
     }
     
-    /**
-     * Add stock entry (entrada de estoque)
-     */
+    
     public function addStockEntry($productId, $quantity, $observations = '') {
-        // Validate input
+        
         $validation = $this->validateInput($productId, $quantity);
         if (!$validation['success']) {
             return $validation;
         }
         
-        // Start transaction
+        
         $this->db->begin_transaction();
         
         try {
-            // Insert into entradas_estoque
+            
             $stmt = $this->db->prepare("
                 INSERT INTO entradas_estoque (id_produto, quantidade, observacoes) 
                 VALUES (?, ?, ?)
@@ -40,7 +35,7 @@ class StockMovement {
                 throw new Exception("Erro ao inserir entrada no estoque");
             }
             
-            // Update product stock
+            
             $updateStmt = $this->db->prepare("
                 UPDATE produtos 
                 SET estoque = estoque + ? 
@@ -52,7 +47,7 @@ class StockMovement {
                 throw new Exception("Erro ao atualizar estoque do produto");
             }
             
-            // Commit transaction
+            
             $this->db->commit();
             
             return [
@@ -62,7 +57,7 @@ class StockMovement {
             ];
             
         } catch (Exception $e) {
-            // Rollback transaction
+            
             $this->db->rollback();
             error_log("Error in addStockEntry: " . $e->getMessage());
             
@@ -73,27 +68,25 @@ class StockMovement {
         }
     }
     
-    /**
-     * Add stock exit (saída de estoque)
-     */
+    
     public function addStockExit($productId, $quantity, $observations = '') {
-        // Validate input
+        
         $validation = $this->validateInput($productId, $quantity);
         if (!$validation['success']) {
             return $validation;
         }
         
-        // Check stock availability
+        
         $stockCheck = $this->productManager->checkStock($productId, $quantity);
         if (!$stockCheck['success']) {
             return $stockCheck;
         }
         
-        // Start transaction
+        
         $this->db->begin_transaction();
         
         try {
-            // Insert into saidas_estoque
+            
             $stmt = $this->db->prepare("
                 INSERT INTO saidas_estoque (id_produto, quantidade, observacoes) 
                 VALUES (?, ?, ?)
@@ -104,7 +97,7 @@ class StockMovement {
                 throw new Exception("Erro ao registrar saída");
             }
             
-            // Update product stock
+            
             $updateStmt = $this->db->prepare("
                 UPDATE produtos 
                 SET estoque = estoque - ? 
@@ -116,7 +109,7 @@ class StockMovement {
                 throw new Exception("Erro ao atualizar estoque");
             }
             
-            // Commit transaction
+            
             $this->db->commit();
             
             return [
@@ -126,7 +119,7 @@ class StockMovement {
             ];
             
         } catch (Exception $e) {
-            // Rollback transaction
+            
             $this->db->rollback();
             error_log("Error in addStockExit: " . $e->getMessage());
             
@@ -137,9 +130,7 @@ class StockMovement {
         }
     }
     
-    /**
-     * Get stock movement history
-     */
+    
     public function getMovementHistory($productId = null, $limit = 50) {
         try {
             $whereClause = $productId ? "WHERE e.id_produto = ?" : "";
@@ -194,9 +185,7 @@ class StockMovement {
         }
     }
     
-    /**
-     * Validate input data
-     */
+    
     private function validateInput($productId, $quantity) {
         if (empty($productId) || !is_numeric($productId)) {
             return ['success' => false, 'message' => 'ID do produto é obrigatório e deve ser numérico'];
@@ -206,7 +195,7 @@ class StockMovement {
             return ['success' => false, 'message' => 'Quantidade deve ser um número positivo'];
         }
         
-        // Check if product exists
+        
         $product = $this->productManager->getProductById($productId);
         if (!$product) {
             return ['success' => false, 'message' => 'Produto não encontrado'];

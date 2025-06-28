@@ -1,8 +1,5 @@
 <?php
-/**
- * Main entry point for the Construction Inventory System
- * Provides a simple web interface for testing the API
- */
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -134,7 +131,7 @@
         </div>
         
         <div class="grid">
-            <!-- Stock Entry Form -->
+            
             <div class="card">
                 <h2>Entrada de Estoque</h2>
                 <form id="entryForm">
@@ -157,7 +154,7 @@
                 <div id="entryResult"></div>
             </div>
             
-            <!-- Stock Exit Form -->
+            
             <div class="card">
                 <h2>Saída de Estoque</h2>
                 <form id="exitForm">
@@ -181,7 +178,7 @@
             </div>
         </div>
         
-        <!-- Products Table -->
+       
         <div class="card">
             <h2>Produtos em Estoque</h2>
             <div id="productsTable">
@@ -189,7 +186,7 @@
             </div>
         </div>
         
-        <!-- Stock History -->
+       
         <div class="card">
             <h2>Histórico de Movimentações</h2>
             <div id="historyTable">
@@ -199,17 +196,17 @@
     </div>
     
     <script>
-        // API base URL
+        
         const API_BASE = './api/';
         
-        // Load products on page load
+       
         document.addEventListener('DOMContentLoaded', function() {
             loadProducts();
             loadProductsTable();
             loadStockHistory();
         });
         
-        // Load products for select dropdowns
+        
         async function loadProducts() {
             try {
                 const response = await fetch(API_BASE + 'products.php');
@@ -219,11 +216,11 @@
                     const entrySelect = document.getElementById('entryProduct');
                     const exitSelect = document.getElementById('exitProduct');
                     
-                    // Clear loading options
+                   
                     entrySelect.innerHTML = '<option value="">Selecione um produto</option>';
                     exitSelect.innerHTML = '<option value="">Selecione um produto</option>';
                     
-                    // Add products to selects
+                    
                     data.data.forEach(product => {
                         const option = `<option value="${product.id_produto}">${product.nome} (Estoque: ${product.estoque})</option>`;
                         entrySelect.innerHTML += option;
@@ -235,7 +232,7 @@
             }
         }
         
-        // Load products table
+        
         async function loadProductsTable() {
             try {
                 const response = await fetch(API_BASE + 'products.php');
@@ -279,7 +276,7 @@
             }
         }
         
-        // Load stock history
+        
         async function loadStockHistory() {
             try {
                 const response = await fetch(API_BASE + 'stock_history.php?limit=20');
@@ -324,7 +321,7 @@
             }
         }
         
-        // Handle stock entry form
+        
         document.getElementById('entryForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -357,7 +354,7 @@
             }
         });
         
-        // Handle stock exit form
+        
         document.getElementById('exitForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             

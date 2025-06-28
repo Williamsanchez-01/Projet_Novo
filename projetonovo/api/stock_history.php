@@ -1,15 +1,12 @@
 <?php
-/**
- * API Endpoint for Stock Movement History
- * Handles GET requests to fetch stock movement history
- */
+
 
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Handle preflight requests
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
@@ -18,19 +15,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 require_once __DIR__ . '/../classes/StockMovement.php';
 
 try {
-    // Only allow GET requests
+    
     if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         throw new Exception('Método não permitido');
     }
     
     $stockMovement = new StockMovement();
     
-    // Get query parameters
+    
     $productId = $_GET['product_id'] ?? null;
     $limit = $_GET['limit'] ?? 50;
     
-    // Validate limit
-    $limit = min(max((int)$limit, 1), 200); // Between 1 and 200
+    
+    $limit = min(max((int)$limit, 1), 200); 
     
     $history = $stockMovement->getMovementHistory($productId, $limit);
     

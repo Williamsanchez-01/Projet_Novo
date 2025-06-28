@@ -1,5 +1,5 @@
 <?php
-// XAMPP Setup Checker for Construction Store Management System
+
 
 echo "<h1>XAMPP Setup Checker</h1>";
 echo "<style>
@@ -10,7 +10,7 @@ echo "<style>
     .info { background: #f0f0f0; padding: 10px; margin: 10px 0; border-left: 4px solid #007cba; }
 </style>";
 
-// Check if we're running on localhost
+
 echo "<h2>Environment Check</h2>";
 if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '127.0.0.1') {
     echo "<span class='success'>✓ Running on localhost</span><br>";
@@ -18,14 +18,14 @@ if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '127.
     echo "<span class='warning'>⚠ Not running on localhost - make sure XAMPP is configured properly</span><br>";
 }
 
-// Check if mysqli extension is loaded
+
 if (extension_loaded('mysqli')) {
     echo "<span class='success'>✓ MySQLi extension is loaded</span><br>";
 } else {
     echo "<span class='error'>✗ MySQLi extension is not loaded</span><br>";
 }
 
-// Test MySQL connection
+
 echo "<h2>MySQL Connection Test</h2>";
 try {
     $connection = new mysqli('localhost', 'root', '');
@@ -46,15 +46,15 @@ try {
         if ($connection->query("CREATE DATABASE IF NOT EXISTS construction_store")) {
             echo "<span class='success'>✓ Database creation/access successful</span><br>";
             
-            // Select the database
+            
             $connection->select_db('construction_store');
             
-            // Test table creation
+            
             $testTable = "CREATE TABLE IF NOT EXISTS test_table (id INT AUTO_INCREMENT PRIMARY KEY, test_field VARCHAR(50))";
             if ($connection->query($testTable)) {
                 echo "<span class='success'>✓ Table creation successful</span><br>";
                 
-                // Clean up test table
+                
                 $connection->query("DROP TABLE IF EXISTS test_table");
             } else {
                 echo "<span class='error'>✗ Table creation failed: " . $connection->error . "</span><br>";
@@ -69,7 +69,7 @@ try {
     echo "<span class='error'>✗ MySQL connection error: " . $e->getMessage() . "</span><br>";
 }
 
-// Check file permissions
+
 echo "<h2>File Permissions Check</h2>";
 if (is_writable('.')) {
     echo "<span class='success'>✓ Directory is writable</span><br>";
@@ -77,7 +77,7 @@ if (is_writable('.')) {
     echo "<span class='warning'>⚠ Directory may not be writable - this could cause issues</span><br>";
 }
 
-// PHP version check
+
 echo "<h2>PHP Information</h2>";
 echo "PHP Version: " . phpversion() . "<br>";
 if (version_compare(phpversion(), '7.4.0', '>=')) {

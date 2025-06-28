@@ -17,7 +17,7 @@ body {
   padding: 20px;
 }
 
-/* Header */
+
 .header {
   background-color: #2c3e50;
   color: white;
@@ -45,7 +45,7 @@ body {
   gap: 1rem;
 }
 
-/* Navigation */
+
 .nav-tabs {
   display: flex;
   background-color: white;
@@ -77,7 +77,7 @@ body {
   color: white;
 }
 
-/* Cards */
+
 .card {
   background-color: white;
   border-radius: 8px;
@@ -101,7 +101,7 @@ body {
   color: #2c3e50;
 }
 
-/* Forms */
+
 .form-group {
   margin-bottom: 1rem;
 }
@@ -137,7 +137,7 @@ body {
   min-height: 80px;
 }
 
-/* Buttons */
+
 .btn {
   padding: 0.75rem 1.5rem;
   border: none;
@@ -191,7 +191,7 @@ body {
   font-size: 0.875rem;
 }
 
-/* Tables */
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -215,7 +215,7 @@ body {
   background-color: #f8f9fa;
 }
 
-/* Alerts */
+
 .alert {
   padding: 1rem;
   border-radius: 4px;
@@ -234,7 +234,7 @@ body {
   border: 1px solid #f5c6cb;
 }
 
-/* Login Form */
+
 .login-container {
   max-width: 400px;
   margin: 5rem auto;
@@ -250,7 +250,7 @@ body {
   color: #2c3e50;
 }
 
-/* Utility Classes */
+
 .text-center {
   text-align: center;
 }
@@ -283,7 +283,7 @@ body {
   display: none;
 }
 
-/* Stock adjustment */
+
 .stock-controls {
   display: flex;
   align-items: center;
@@ -294,7 +294,7 @@ body {
   width: 80px;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .nav-tabs {
     flex-direction: column;

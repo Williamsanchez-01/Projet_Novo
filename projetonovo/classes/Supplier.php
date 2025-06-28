@@ -54,7 +54,7 @@ class Supplier {
     }
     
     public function delete($id) {
-        // Check if supplier has products
+        
         $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM products WHERE supplier_id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();

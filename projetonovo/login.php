@@ -4,7 +4,7 @@ require_once 'includes/auth.php';
 $auth = new Auth();
 $message = '';
 
-// Redirect if already logged in
+
 if ($auth->isLoggedIn()) {
     header('Location: dashboard.php');
     exit();
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button class="nav-tab" onclick="showRegister()">Register</button>
         </div>
         
-        <!-- Login Form -->
+        
         <form id="loginForm" method="POST">
             <div class="form-group">
                 <label class="form-label">Username:</label>
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" name="login" class="btn btn-primary" style="width: 100%;">Login</button>
         </form>
         
-        <!-- Register Form -->
+       
         <form id="registerForm" method="POST" class="hidden">
             <div class="form-group">
                 <label class="form-label">Username:</label>

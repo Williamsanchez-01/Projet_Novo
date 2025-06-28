@@ -1,10 +1,7 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
-/**
- * Product Management Class
- * Handles all product-related database operations
- */
+
 class Product {
     private $db;
     
@@ -12,9 +9,7 @@ class Product {
         $this->db = getDbConnection();
     }
     
-    /**
-     * Get all products with supplier information
-     */
+    
     public function getAllProducts() {
         try {
             $query = "
@@ -45,9 +40,7 @@ class Product {
         }
     }
     
-    /**
-     * Get product by ID
-     */
+    
     public function getProductById($id) {
         try {
             $stmt = $this->db->prepare("
@@ -71,9 +64,7 @@ class Product {
         }
     }
     
-    /**
-     * Check if product has sufficient stock
-     */
+    
     public function checkStock($productId, $quantity) {
         try {
             $stmt = $this->db->prepare("SELECT estoque FROM produtos WHERE id_produto = ?");

@@ -14,7 +14,7 @@ $suppliers = $supplierManager->getAll();
 $message = '';
 $activeTab = $_GET['tab'] ?? 'products';
 
-// Handle form submissions
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         switch ($_POST['action']) {
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
         }
         
-        // Refresh data
+        
         $products = $productManager->getAll();
         $suppliers = $supplierManager->getAll();
     }
@@ -107,14 +107,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         
         <?php if ($activeTab === 'products'): ?>
-            <!-- Products Management -->
+           
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title">Product Management</h2>
                     <button onclick="showProductForm()" class="btn btn-primary">Add Product</button>
                 </div>
                 
-                <!-- Add/Edit Product Form -->
+              
                 <form id="productForm" method="POST" class="hidden mb-2">
                     <input type="hidden" name="action" id="productAction" value="create_product">
                     <input type="hidden" name="id" id="productId">
@@ -160,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </form>
                 
-                <!-- Products Table -->
+                
                 <table class="table">
                     <thead>
                         <tr>
@@ -195,14 +195,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             
         <?php elseif ($activeTab === 'suppliers'): ?>
-            <!-- Suppliers Management -->
+           
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title">Supplier Management</h2>
                     <button onclick="showSupplierForm()" class="btn btn-primary">Add Supplier</button>
                 </div>
                 
-                <!-- Add/Edit Supplier Form -->
+            
                 <form id="supplierForm" method="POST" class="hidden mb-2">
                     <input type="hidden" name="action" id="supplierAction" value="create_supplier">
                     <input type="hidden" name="id" id="supplierId">
@@ -238,7 +238,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </form>
                 
-                <!-- Suppliers Table -->
+               
                 <table class="table">
                     <thead>
                         <tr>
@@ -271,7 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             
         <?php elseif ($activeTab === 'stock'): ?>
-            <!-- Stock Adjustment -->
+           
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title">Stock Adjustment</h2>
@@ -308,7 +308,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <button type="submit" class="btn btn-primary">Adjust Stock</button>
                 </form>
                 
-                <!-- Current Stock Levels -->
+                
                 <h3>Current Stock Levels</h3>
                 <table class="table">
                     <thead>
@@ -343,7 +343,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     
     <script>
-        // Product form functions
+      
         function showProductForm() {
             document.getElementById('productForm').classList.remove('hidden');
             document.getElementById('productAction').value = 'create_product';
@@ -367,7 +367,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             document.getElementById('productDescription').value = product.description || '';
         }
         
-        // Supplier form functions
+      
         function showSupplierForm() {
             document.getElementById('supplierForm').classList.remove('hidden');
             document.getElementById('supplierAction').value = 'create_supplier';

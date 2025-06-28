@@ -11,7 +11,7 @@ class Auth {
     }
     
     public function register($username, $password) {
-        // Validate input
+        
         if (empty($username) || empty($password)) {
             return ['success' => false, 'message' => 'Username and password are required'];
         }
@@ -24,7 +24,7 @@ class Auth {
             return ['success' => false, 'message' => 'Password must be at least 6 characters'];
         }
         
-        // Check if username exists
+        
         $stmt = $this->db->prepare("SELECT id FROM users WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -34,7 +34,7 @@ class Auth {
             return ['success' => false, 'message' => 'Username already exists'];
         }
         
-        // Hash password and insert user
+        
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
         $stmt->bind_param("ss", $username, $hashedPassword);

@@ -1,15 +1,12 @@
 <?php
-/**
- * API Endpoint for Products
- * Handles GET requests to fetch products
- */
+
 
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Handle preflight requests
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
@@ -18,14 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 require_once __DIR__ . '/../classes/Product.php';
 
 try {
-    // Only allow GET requests
+    
     if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         throw new Exception('Método não permitido');
     }
     
     $productManager = new Product();
     
-    // Check if specific product ID is requested
+    
     $productId = $_GET['id'] ?? null;
     
     if ($productId) {
